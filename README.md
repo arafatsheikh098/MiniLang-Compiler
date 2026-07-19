@@ -40,16 +40,16 @@ make --version
 
 ```
 MiniCompiler/
-├── lexer.l              ← Arafat
-├── parser.y             ← Adnan
-├── ast.c / ast.h        ← (shared)
-├── symbol_table.c/.h    ← Arafat
-├── semantic.c/.h        ← Joyesh
-├── tac.c/.h             ← Mahdi
-├── codegen.c/.h         ← Mahdi
-├── optimizer.c/.h       ← Mahdi
-├── vm.c/.h              ← Mahdi
-├── main.c               ← (shared)
+├── lexer.l            
+├── parser.y           
+├── ast.c / ast.h       
+├── symbol_table.c/.h    
+├── semantic.c/.h       
+├── tac.c/.h             
+├── codegen.c/.h         
+├── optimizer.c/.h      
+├── vm.c/.h            
+├── main.c             
 ├── Makefile
 └── testcases/
     ├── test1.ml ... test6.ml
