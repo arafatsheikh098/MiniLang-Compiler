@@ -36,6 +36,26 @@ make --version
 > ```
 
 ---
+### Project Structure
+
+```
+MiniCompiler/
+├── lexer.l              ← Arafat
+├── parser.y             ← Adnan
+├── ast.c / ast.h        ← (shared)
+├── symbol_table.c/.h    ← Arafat
+├── semantic.c/.h        ← Joyesh
+├── tac.c/.h             ← Mahdi
+├── codegen.c/.h         ← Mahdi
+├── optimizer.c/.h       ← Mahdi
+├── vm.c/.h              ← Mahdi
+├── main.c               ← (shared)
+├── Makefile
+└── testcases/
+    ├── test1.ml ... test6.ml
+    └── error_*.ml
+```
+---
 
 ## Build
 
