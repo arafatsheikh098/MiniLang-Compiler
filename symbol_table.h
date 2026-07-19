@@ -13,8 +13,12 @@ typedef struct Symbol {
 
 /* ─── Scope (one scope per block) ─── */
 typedef struct Scope {
+    char         *scope_name;
     Symbol       *symbols;  /* head of symbol list in this scope */
     struct Scope *parent;   /* enclosing scope (NULL for global) */
+    struct Scope **children;
+    int          num_children;
+    int          capacity_children;
 } Scope;
 
 /* ─── API ─── */
@@ -42,5 +46,8 @@ Symbol *sym_lookup(const char *name);
 /* Look up only in the current (innermost) scope.
    Returns NULL if not found. */
 Symbol *sym_lookup_local(const char *name);
+
+/* Print the symbol table tree */
+void sym_dump(void);
 
 #endif
