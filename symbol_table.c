@@ -72,6 +72,21 @@ int sym_declare(const char *name, DataType type, int lineno)
     return 0;
 }
 
+Symbol *sym_lookup(const char *name)
+{
+    Scope *scope = current_scope;
+    while (scope) {
+        Symbol *sym = scope->symbols;
+        while (sym) {
+            if (strcmp(sym->name, name) == 0)
+                return sym;
+            sym = sym->next;
+        }
+        scope = scope->parent;
+    }
+    return NULL;
+}
+
 Symbol *sym_lookup_local(const char *name)
 {
     if (!current_scope) return NULL;
