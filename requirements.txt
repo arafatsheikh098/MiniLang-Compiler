@@ -1,0 +1,7 @@
+# System Dependencies for MiniLang Compiler
+# Note: This is a C project. These are system-level packages (apt/brew), not pip packages.
+
+gcc>=9.0
+make
+flex>=2.6
+bison>=3.0
