@@ -211,6 +211,5 @@ int sem_analyse(ASTNode *root)
     error_count = 0;
     sym_init();
     analyse_node(root);
-    sym_destroy();
     return error_count;
 }
