@@ -1,16 +1,7 @@
 CC       = gcc
 CFLAGS   = -Wall -Wextra -g -std=c11
 LEX_CFLAGS = -g -std=c11 -Wno-sign-compare -Wno-unused-function -Wno-comment
-
-ifeq ($(OS),Windows_NT)
-  EXEEXT := .exe
-  FLEX := C:/MinGW/msys/1.0/bin/flex.exe
-else
-  EXEEXT :=
-  FLEX := flex
-endif
-
-TARGET   = minicompiler$(EXEEXT)
+TARGET   = minicompiler
 
 LEX_OUT   = lex.yy.c
 BISON_OUT = parser.tab.c parser.tab.h
@@ -38,7 +29,7 @@ $(TARGET): $(OBJS)
 	@echo "  ✓  Build successful → ./$(TARGET)"
 
 $(LEX_OUT): lexer.l parser.tab.h
-	$(FLEX) -t $< > $@
+	flex -o $@ $<
 
 parser.tab.c parser.tab.h: parser.y
 	bison -d -v -o parser.tab.c $<
