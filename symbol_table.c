@@ -51,3 +51,35 @@ void sym_pop_scope(void)
     current_scope = current_scope->parent;
     free(old);
 }
+
+int sym_declare(const char *name, DataType type, int lineno)
+{
+    /* Check for duplicate in same scope */
+    if (sym_lookup_local(name)) {
+        return -1;  /* duplicate */
+    }
+
+    Symbol *sym = calloc(1, sizeof(Symbol));
+    if (!sym) {
+        fprintf(stderr, "sym_declare: out of memory\n");
+        exit(1);
+    }
+    sym->name   = strdup(name);
+    sym->type   = type;
+    sym->lineno = lineno;
+    sym->next   = current_scope->symbols;
+    current_scope->symbols = sym;
+    return 0;
+}
+
+Symbol *sym_lookup_local(const char *name)
+{
+    if (!current_scope) return NULL;
+    Symbol *sym = current_scope->symbols;
+    while (sym) {
+        if (strcmp(sym->name, name) == 0)
+            return sym;
+        sym = sym->next;
+    }
+    return NULL;
+}
