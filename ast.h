@@ -96,4 +96,26 @@ struct ASTNode {
   } u;
 };
 
+ASTNode *ast_int_lit(int val, int lineno);
+ASTNode *ast_bool_lit(int val, int lineno);
+ASTNode *ast_ident(const char *name, int lineno);
+ASTNode *ast_decl(const char *name, DataType dt, int lineno);
+ASTNode *ast_decl_assign(const char *name, DataType dt, ASTNode *init,
+                         int lineno);
+ASTNode *ast_assign(const char *name, ASTNode *expr, int lineno);
+ASTNode *ast_binop(BinOp op, ASTNode *left, ASTNode *right, int lineno);
+ASTNode *ast_unary_minus(ASTNode *operand, int lineno);
+ASTNode *ast_if(ASTNode *cond, ASTNode *then_b, int lineno);
+ASTNode *ast_if_else(ASTNode *cond, ASTNode *then_b, ASTNode *else_b,
+                     int lineno);
+ASTNode *ast_while(ASTNode *cond, ASTNode *body, int lineno);
+ASTNode *ast_print_stmt(ASTNode *expr, int lineno);
+ASTNode *ast_block(ASTNode *stmts, int lineno);
+ASTNode *ast_stmt_list(ASTNode *stmt, ASTNode *next);
+
+const char *binop_str(BinOp op);
+const char *datatype_str(DataType dt);
+void ast_dump(ASTNode *node, int indent);
+void ast_free(ASTNode *node);
+
 #endif
