@@ -59,3 +59,19 @@ typedef struct ASTNode {
     
     struct ASTNode *next; // For linked lists of statements
 } ASTNode;
+
+ASTNode* create_int_literal(int val, int line);
+ASTNode* create_bool_literal(int val, int line);
+ASTNode* create_identifier(char *name, int line);
+ASTNode* create_binary_op(Operator op, ASTNode *left, ASTNode *right, int line);
+ASTNode* create_assign(char *name, ASTNode *expr, int line);
+ASTNode* create_var_decl(DataType type, char *name, int line);
+ASTNode* create_if(ASTNode *cond, ASTNode *body, ASTNode *else_body, int line);
+ASTNode* create_while(ASTNode *cond, ASTNode *body, int line);
+ASTNode* create_print(ASTNode *expr, int line);
+ASTNode* create_block(ASTNode *stmt_list, int line);
+ASTNode* create_program(ASTNode *stmt_list, int line);
+
+void append_stmt(ASTNode **list, ASTNode *stmt);
+
+#endif
