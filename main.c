@@ -119,6 +119,8 @@ int main(int argc, char *argv[])
     printf("    • Division by zero detection\n\n");
 
     printf("  ✓  Semantic analysis complete — no errors found.\n\n");
+    
+    sym_dump();
 
     /* ═══════════════════════════════════════════════════════════════════
        PHASE 4 : INTERMEDIATE CODE GENERATION (TAC)
@@ -194,6 +196,7 @@ int main(int argc, char *argv[])
     vm_free(vm_prog);
     tac_free(tac);
     ast_free(parse_root);
+    sym_destroy();
 
     return 0;
 }
