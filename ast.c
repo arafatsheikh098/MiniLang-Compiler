@@ -30,3 +30,70 @@ ASTNode* create_identifier(char *name, int line) {
     n->name = strdup(name);
     return n;
 }
+
+ASTNode* create_binary_op(Operator op, ASTNode *left, ASTNode *right, int line) {
+    ASTNode *n = create_node(NODE_BINARY_OP, line);
+    n->op = op;
+    n->left = left;
+    n->right = right;
+    return n;
+}
+
+ASTNode* create_assign(char *name, ASTNode *expr, int line) {
+    ASTNode *n = create_node(NODE_ASSIGN, line);
+    n->name = strdup(name);
+    n->right = expr;
+    return n;
+}
+
+ASTNode* create_var_decl(DataType type, char *name, int line) {
+    ASTNode *n = create_node(NODE_VAR_DECL, line);
+    n->dataType = type;
+    n->name = strdup(name);
+    return n;
+}
+
+ASTNode* create_if(ASTNode *cond, ASTNode *body, ASTNode *else_body, int line) {
+    ASTNode *n = create_node(NODE_IF, line);
+    n->cond = cond;
+    n->body = body;
+    n->else_body = else_body;
+    return n;
+}
+
+ASTNode* create_while(ASTNode *cond, ASTNode *body, int line) {
+    ASTNode *n = create_node(NODE_WHILE, line);
+    n->cond = cond;
+    n->body = body;
+    return n;
+}
+
+ASTNode* create_print(ASTNode *expr, int line) {
+    ASTNode *n = create_node(NODE_PRINT, line);
+    n->left = expr;
+    return n;
+}
+
+ASTNode* create_block(ASTNode *stmt_list, int line) {
+    ASTNode *n = create_node(NODE_BLOCK, line);
+    n->body = stmt_list;
+    return n;
+}
+
+ASTNode* create_program(ASTNode *stmt_list, int line) {
+    ASTNode *n = create_node(NODE_PROGRAM, line);
+    n->body = stmt_list;
+    return n;
+}
+
+void append_stmt(ASTNode **list, ASTNode *stmt) {
+    if (*list == NULL) {
+        *list = stmt;
+    } else {
+        ASTNode *cur = *list;
+        while (cur->next != NULL) {
+            cur = cur->next;
+        }
+        cur->next = stmt;
+    }
+}
